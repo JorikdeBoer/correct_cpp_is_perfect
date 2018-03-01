@@ -24,6 +24,10 @@ int do_main(const std::vector<std::string>& args)
     if (value == 0) {
        std::cout << "false\n"; return 0;
     }
+    // Zero is not perfect
+    if (value == 1) {
+       std::cout << "false\n"; return 0;
+    }
     //Collect the proper divisors
     std::vector<int> proper_divisors;
     
@@ -47,6 +51,9 @@ int do_main(const std::vector<std::string>& args)
     for (const int proper_divisor: proper_divisors) { sum += proper_divisor; }
     if (sum == value){
         std::cout << "true\n"; return 0;
+    }
+    else {
+    std::cout << "false\n"; return 0;
     }
   }
   catch (const std::exception&)

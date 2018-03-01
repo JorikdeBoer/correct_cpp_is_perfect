@@ -49,7 +49,7 @@ int do_main(const std::vector<std::string>& args)
     }
     std::vector<int> proper_divisors = get_proper_divisors(value);
     //sum the proper divisors, if not known if number is perfect
-    int sum{0};
+    int sum = 0;
     for (const int proper_divisor: proper_divisors) { sum += proper_divisor; }
     if (sum == value){
         std::cout << "true\n"; return 0;

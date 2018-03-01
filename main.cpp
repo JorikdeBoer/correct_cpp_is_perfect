@@ -4,6 +4,28 @@
 #include <vector>
 
 /// Implementation of is_perfect main function
+
+std::vector<int> get_proper_divisors(const int value)
+{
+//Collect the proper divisors
+std::vector<int> proper_divisors;
+if (value == 2)
+{
+  proper_divisors.push_back(1);
+}
+else if (value > 2)
+{
+  for (int denominator=1; denominator!=value-1; ++denominator)
+  {
+    if (value % denominator == 0)
+    {
+      proper_divisors.push_back(denominator);
+    }
+  }
+}
+return proper_divisors;
+}
+
 int do_main(const std::vector<std::string>& args)
 {
   if (args.size() != 2)
@@ -25,22 +47,7 @@ int do_main(const std::vector<std::string>& args)
     if (value == 1) {
        std::cout << "false\n"; return 0;
     }
-    //Collect the proper divisors
-    std::vector<int> proper_divisors;
-    if (value == 2)
-    {
-      proper_divisors.push_back(1);
-    }
-    else if (value > 2)
-    {
-      for (int denominator=1; denominator!=value-1; ++denominator)
-      {
-        if (value % denominator == 0)
-        {
-          proper_divisors.push_back(denominator);
-        }
-      }
-    }
+    std::vector<int> proper_divisors = get_proper_divisors(value);
     //sum the proper divisors, if not known if number is perfect
     int sum{0};
     for (const int proper_divisor: proper_divisors) { sum += proper_divisor; }

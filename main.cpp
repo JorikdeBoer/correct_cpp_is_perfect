@@ -13,9 +13,6 @@ int do_main(const std::vector<std::string>& args)
   try
   {
     const int value = std::stoi(args[1]);
-
-    //int is_perfect{-1};
-
     // Negative values are not perfect
     if (value < 0) {
        std::cout << "false\n"; return 0;
@@ -30,7 +27,6 @@ int do_main(const std::vector<std::string>& args)
     }
     //Collect the proper divisors
     std::vector<int> proper_divisors;
-    
     if (value == 2)
     {
       proper_divisors.push_back(1);
@@ -45,7 +41,6 @@ int do_main(const std::vector<std::string>& args)
         }
       }
     }
-
     //sum the proper divisors, if not known if number is perfect
     int sum{0};
     for (const int proper_divisor: proper_divisors) { sum += proper_divisor; }
@@ -67,6 +62,8 @@ int do_main(const std::vector<std::string>& args)
 int main(int argc, char* argv[])
 {
     assert(do_main( { "is_perfect" } ) == 1);
+    assert(do_main( { "is_perfect", "0" } ) == 0);
+    assert(do_main( { "is_perfect", "1" } ) == 0);
     assert(do_main( { "is_perfect", "4" } ) == 0);
     assert(do_main( { "is_perfect", "6" } ) == 0);
     assert(do_main( { "is_perfect", "2" } ) == 0);
@@ -75,7 +72,6 @@ int main(int argc, char* argv[])
     assert(do_main( { "is_perfect", "nonsense" } ) == 1);
     assert(do_main( { "is_perfect", "7","42" } ) == 1);
     assert(do_main( { "is_perfect", "-4" } ) == 0);
-
     const std::vector<std::string> args (argv, argv + argc);
     return do_main(args);
 }

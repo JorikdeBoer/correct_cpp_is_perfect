@@ -3,8 +3,7 @@
 #include <string>
 #include <vector>
 
-/// Implementation of is_perfect main function
-
+/// Implementation of get_proper_divisors function
 std::vector<int> get_proper_divisors(const int value)
 {
 //Collect the proper divisors
@@ -26,6 +25,7 @@ else if (value > 2)
 return proper_divisors;
 }
 
+/// Implementation of is_perfect main function
 int do_main(const std::vector<std::string>& args)
 {
   if (args.size() != 2)
@@ -54,9 +54,6 @@ int do_main(const std::vector<std::string>& args)
     if (sum == value){
         std::cout << "true\n"; return 0;
     }
-    else {
-    std::cout << "false\n"; return 0;
-    }
   }
   catch (const std::exception&)
   {
@@ -72,8 +69,6 @@ int main(int argc, char* argv[])
     assert(do_main( { "is_perfect", "0" } ) == 0);
     assert(do_main( { "is_perfect", "1" } ) == 0);
     assert(do_main( { "is_perfect", "4" } ) == 0);
-    assert(do_main( { "is_perfect", "6" } ) == 0);
-    assert(do_main( { "is_perfect", "2" } ) == 0);
     assert(do_main( { "is_perfect", "28" } ) == 0);
     assert(do_main( { "is_perfect", "123456789101112131415161718" } ) == 1);
     assert(do_main( { "is_perfect", "nonsense" } ) == 1);

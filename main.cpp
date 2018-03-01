@@ -3,33 +3,35 @@
 #include <string>
 #include <vector>
 
-int main(int argc, char* argv[])
+/// Implementation of is_perfect main function
+int do_main(const std::vector<std::string>& args)
 {
-  if (argc != 2) return 1;
+  if (args.size() != 2)
+  {
+    return 1;
+  }
   try
   {
-    const int value{std::stoi(argv[1])};
+    const int value = std::stoi(args[1]);
 
-    // Is this a perfect number?
-    // -1: unknown
-    //  0: false
-    //  1: true
-    int is_perfect{-1};
+    //int is_perfect{-1};
 
     // Negative values are not perfect
-    if (value < 0) is_perfect = 0;
-
+    if (value < 0) {
+       std::cout << "false\n"; return 0;
+    }
     // Zero is not perfect
-    if (is_perfect == -1 && value == 0) is_perfect = 0;
-
+    if (value == 0) {
+       std::cout << "false\n"; return 0;
+    }
     //Collect the proper divisors
     std::vector<int> proper_divisors;
     
-    if (is_perfect == -1 && value == 2)
+    if (value == 2)
     {
       proper_divisors.push_back(1);
     }
-    else if (is_perfect == -1 && value > 2)
+    else if (value > 2)
     {
       for (int denominator=1; denominator!=value-1; ++denominator)
       {
@@ -42,26 +44,30 @@ int main(int argc, char* argv[])
 
     //sum the proper divisors, if not known if number is perfect
     int sum{0};
-    if (is_perfect == -1)
-    {
-      for (const int proper_divisor: proper_divisors) { sum += proper_divisor; }
-    }
-    if (is_perfect == -1 && sum == value) is_perfect = 1;
-    if (is_perfect == -1) is_perfect = 0;
-
-    //show
-    assert(is_perfect != -1); //Must be known now
-    if (is_perfect == 1)
-    {
-      std::cout << "true\n";
-    }
-    else
-    {
-      std::cout << "false\n";
+    for (const int proper_divisor: proper_divisors) { sum += proper_divisor; }
+    if (sum == value){
+        std::cout << "true\n"; return 0;
     }
   }
   catch (const std::exception&)
   {
     return 1;
   }
+}
+
+/// is_perfect main function, that also tests its implementation
+int main(int argc, char* argv[])
+{
+    assert(do_main( { "is_perfect" } ) == 1);
+    assert(do_main( { "is_perfect", "4" } ) == 0);
+    assert(do_main( { "is_perfect", "6" } ) == 1);
+    assert(do_main( { "is_perfect", "2" } ) == 0);
+    assert(do_main( { "is_perfect", "28" } ) == 1);
+    assert(do_main( { "is_perfect", "123456789101112131415161718" } ) == 1);
+    assert(do_main( { "is_perfect", "nonsense" } ) == 1);
+    assert(do_main( { "is_perfect", "7","42" } ) == 1);
+    assert(do_main( { "is_perfect", "-4" } ) == 0);
+
+    const std::vector<std::string> args (argv, argv + argc);
+    return do_main(args);
 }

@@ -70,7 +70,7 @@ int main(int argc, char* argv[])
     assert(do_main( { "is_perfect", "1" } ) == 0);
     assert(do_main( { "is_perfect", "4" } ) == 0);
     assert(do_main( { "is_perfect", "28" } ) == 0);
-    assert(do_main( { "is_perfect", "2" } ) == 1);
+    assert(do_main( { "is_perfect", "2" } ) == 0);
     assert(do_main( { "is_perfect", "nonsense" } ) == 1);
     assert(do_main( { "is_perfect", "7","42" } ) == 1);
     assert(do_main( { "is_perfect", "-4" } ) == 0);
